@@ -1,0 +1,43 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct employee {
+    int id;
+    char name[50];
+    float salary;
+};
+
+int main() {
+
+    int n, i;
+    float totalsalary = 0;
+    struct employee *ptr;
+
+    printf("Enter how many employee details you want to store: ");
+    scanf("%d", &n);
+
+    ptr = (struct employee*) malloc(n * sizeof(struct employee));
+    if (ptr == NULL) {
+        printf("Memory allocation failed!\n");
+        return 1;
+    }
+
+    for (i = 0; i < n; i++) {
+
+        printf("Enter %d employee id: ", i + 1);
+        scanf("%d", &(*(ptr + i)).id);
+
+        printf("Enter %d employee name: ", i + 1);
+        scanf("%s", ptr[i].name);
+
+        printf("Enter %d employee salary: ", i + 1);
+        scanf("%f", &ptr[i].salary);
+
+        totalsalary = totalsalary + ptr[i].salary;
+    }
+
+    printf("\nTotal salary = %.2f\n", totalsalary);
+
+    free(ptr);
+    return 0;
+}
