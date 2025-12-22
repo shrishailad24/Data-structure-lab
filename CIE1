@@ -1,0 +1,32 @@
+#include <stdio.h>
+
+int a[5] = {20, 25, 30, 41, 55};
+
+int search(int ele, int low, int high) {
+    if (high >= low) {
+        int mid = low + (high - low) / 2;
+
+        if (a[mid] == ele)
+            return mid;
+        else if (a[mid] > ele)
+            return search(ele, low, mid - 1);
+        else
+            return search(ele, mid + 1, high);
+    }
+    return -1;
+}
+
+int main() {
+    int ele, flag;
+    printf("Enter number: ");
+    scanf("%d", &ele);
+
+    flag = search(ele, 0, 4);
+
+    if (flag == -1)
+        printf("Not found\n");
+    else
+        printf("Found at position %d\n", flag + 1);
+
+    return 0;
+}
